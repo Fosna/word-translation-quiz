@@ -1,35 +1,50 @@
 let answers = {};
 
+console.log('bee');
+
 document.addEventListener('DOMContentLoaded', () => {
-  fetch('questions.json')
+  fetch('dictionary.json')
     .then(response => response.json())
     .then(data => {
-      const quizForm = document.getElementById('quizForm');
-      const randomQuestions = getRandomQuestions(data.questions, 2);
-      console.log(randomQuestions);
+      console.log(data);
 
-      randomQuestions.forEach((question, index) => {
+      const quizForm = document.getElementById('quizForm');
+      const dictionary = data.dictionary;
+      const randomWords = getRandomWords(dictionary, 2);
+      console.log(randomWords);
+
+      randomWords.forEach((word, index) => {
         const questionDiv = document.createElement('div');
         questionDiv.classList.add('question');
-        const shuffledOptions = shuffleArray(question.options);
+        const correctAnswer = dictionary[word];
+        const options = getOptions(dictionary, correctAnswer);
+        const shuffledOptions = shuffleArray(options);
         questionDiv.innerHTML = `
-          <p>${index + 1}. ${question.text}</p>
+          <p>${index + 1}. ${word}</p>
           ${shuffledOptions.map(option => `
-            <label><input type="radio" name="q${index + 1}" value="${option.value}"> ${option.text}</label><br>
+            <label><input type="radio" name="q${index + 1}" value="${option}"> ${option}</label><br>
           `).join('')}
         `;
 
         console.log(questionDiv);
 
         quizForm.appendChild(questionDiv); // Append the question div to the form
-        answers[`q${index + 1}`] = question.answer;
+        answers[`q${index + 1}`] = correctAnswer;
       });
     });
 });
 
-function getRandomQuestions(questions, num) {
-  const shuffled = questions.sort(() => 0.5 - Math.random());
+function getRandomWords(dictionary, num) {
+  const words = Object.keys(dictionary);
+  const shuffled = words.sort(() => 0.5 - Math.random());
   return shuffled.slice(0, num);
+}
+
+function getOptions(dictionary, correctAnswer) {
+  const allAnswers = Object.values(dictionary);
+  const wrongAnswers = allAnswers.filter(answer => answer !== correctAnswer);
+  const randomWrongAnswers = shuffleArray(wrongAnswers).slice(0, 3);
+  return [correctAnswer, ...randomWrongAnswers];
 }
 
 function shuffleArray(array) {
