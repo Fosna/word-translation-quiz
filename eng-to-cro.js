@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const quizForm = document.getElementById('quizForm');
       const dictionary = data.dictionary;
-      const randomWords = getRandomWords(dictionary, 2);
+      const randomWords = getRandomWords(dictionary, 10);
 
       randomWords.forEach((word, index) => {
         const questionDiv = document.createElement('div');
