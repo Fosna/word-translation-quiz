@@ -4,35 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Word Translation Quiz</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-    }
-    .question {
-      margin-bottom: 20px;
-    }
-    button {
-      margin-top: 20px;
-      padding: 10px 20px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #45a049;
-    }
-    .result {
-      margin-top: 20px;
-      font-weight: bold;
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <h1>Word Translation Quiz</h1>
   <form id="quizForm">
-    <div class="question">
+    <div class="question">-
       <p>1. Translate "Apple" to Croatian:</p>
       <input type="radio" name="q1" value="Jabuka"> Jabuka<br>
       <input type="radio" name="q1" value="Kruška"> Kruška<br>
@@ -62,12 +39,23 @@
       let score = 0;
       const form = document.getElementById('quizForm');
       const resultDiv = document.getElementById('result');
+      resultDiv.innerHTML = ''; // Clear previous results
 
       for (let [key, value] of Object.entries(answers)) {
         const selected = form.querySelector(`input[name="${key}"]:checked`);
+        const questionDiv = form.querySelector(`input[name="${key}"]`).closest('.question');
+        const resultP = document.createElement('p');
+
         if (selected && selected.value === value) {
           score++;
+          resultP.textContent = `Question ${key.slice(1)}: Correct`;
+          resultP.classList.add('correct');
+        } else {
+          resultP.textContent = `Question ${key.slice(1)}: Wrong (Correct answer: ${value})`;
+          resultP.classList.add('wrong');
         }
+
+        questionDiv.appendChild(resultP);
       }
 
       resultDiv.textContent = `You scored ${score} out of ${Object.keys(answers).length}`;
