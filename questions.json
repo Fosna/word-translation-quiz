@@ -1,0 +1,54 @@
+{
+  "questions": [
+    {
+      "text": "Apple",
+      "options": [
+        { "value": "Jabuka", "text": "Jabuka" },
+        { "value": "Kruška", "text": "Kruška" },
+        { "value": "Banana", "text": "Banana" },
+        { "value": "Naranča", "text": "Naranča" }
+      ],
+      "answer": "Jabuka"
+    },
+    {
+      "text": "Car",
+      "options": [
+        { "value": "Brod", "text": "Brod" },
+        { "value": "Zrakoplov", "text": "Zrakoplov" },
+        { "value": "Automobil", "text": "Automobil" },
+        { "value": "Bicikl", "text": "Bicikl" }
+      ],
+      "answer": "Automobil"
+    },
+    {
+      "text": "House",
+      "options": [
+        { "value": "Kuća", "text": "Kuća" },
+        { "value": "Stan", "text": "Stan" },
+        { "value": "Zgrada", "text": "Zgrada" },
+        { "value": "Vikendica", "text": "Vikendica" }
+      ],
+      "answer": "Kuća"
+    },
+    {
+      "text": "Dog",
+      "options": [
+        { "value": "Pas", "text": "Pas" },
+        { "value": "Mačka", "text": "Mačka" },
+        { "value": "Ptica", "text": "Ptica" },
+        { "value": "Riba", "text": "Riba" }
+      ],
+      "answer": "Pas"
+    },
+    {
+      "text": "Book",
+      "options": [
+        { "value": "Knjiga", "text": "Knjiga" },
+        { "value": "Novine", "text": "Novine" },
+        { "value": "Časopis", "text": "Časopis" },
+        { "value": "Bilježnica", "text": "Bilježnica" }
+      ],
+      "answer": "Knjiga"
+    }
+  ]
+}
