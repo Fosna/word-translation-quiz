@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translation Quiz - Merge files</title>
+</head>
+<body>
+    <h1>Word Translation Quiz: Merge Translations</h1>
+    <input type="file" id="englishFile" accept=".txt">t
+    <input type="file" id="croatianFile" accept=".txt">
+    <button onclick="generateDictionary()">Generate Dictionary</button>
+    <pre id="output"></pre>
+
+    <script>
+        function readFile(file, callback) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                callback(event.target.result);
+            };
+            reader.readAsText(file);
+        }
+
+        function generateDictionary() {
+            const englishFile = document.getElementById('englishFile').files[0];
+            const croatianFile = document.getElementById('croatianFile').files[0];
+
+            if (!englishFile || !croatianFile) {
+                alert('Please select both English and Croatian files.');
+                return;
+            }
+
+            readFile(englishFile, function(englishContent) {
+                readFile(croatianFile, function(croatianContent) {
+                    const englishLines = englishContent.split('\n').map(line => line.trim());
+                    const croatianLines = croatianContent.split('\n').map(line => line.trim());
+
+                    const dictionary = {};
+                    for (let i = 0; i < englishLines.length; i++) {
+                        dictionary[englishLines[i]] = croatianLines[i];
+                    }
+
+                    const output = {
+                        dictionary: dictionary
+                    };
+
+                    document.getElementById('output').textContent = JSON.stringify(output, null, 4);
+                });
+            });
+        }
+    </script>
+</body>
+</html>

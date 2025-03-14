@@ -1,17 +1,13 @@
 let answers = {};
 
-console.log('bee');
-
 document.addEventListener('DOMContentLoaded', () => {
   fetch('dictionary.json')
     .then(response => response.json())
     .then(data => {
-      console.log(data);
 
       const quizForm = document.getElementById('quizForm');
       const dictionary = data.dictionary;
       const randomWords = getRandomWords(dictionary, 2);
-      console.log(randomWords);
 
       randomWords.forEach((word, index) => {
         const questionDiv = document.createElement('div');
@@ -25,8 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
             <label><input type="radio" name="q${index + 1}" value="${option}"> ${option}</label><br>
           `).join('')}
         `;
-
-        console.log(questionDiv);
 
         quizForm.appendChild(questionDiv); // Append the question div to the form
         answers[`q${index + 1}`] = correctAnswer;
