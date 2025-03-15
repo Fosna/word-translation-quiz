@@ -1,5 +1,6 @@
 let answers = {};
-let statistics = JSON.parse(localStorage.getItem('statistics')) || {};
+let statsDocName = 'statistics';
+let statistics = {};
 
 document.addEventListener('DOMContentLoaded', () => {
   const urlParams = new URLSearchParams(window.location.search);
@@ -7,28 +8,50 @@ document.addEventListener('DOMContentLoaded', () => {
   fetch('dictionary.json')
     .then(response => response.json())
     .then(data => {
-      const quizForm = document.getElementById('quizForm');
       const fromLang = urlParams.get('fromLang') || 'eng'; // Default to 'eng' if not specified
+      const isSpelling = urlParams.get('spelling') === 'true'; // Default to false if not specified
+      statsDocName = isSpelling ? 'spellingStatistics' : 'statistics';
+      statistics = JSON.parse(localStorage.getItem(statsDocName)) || {};
 
       const maybeInvertDictionary = fromLang === 'cro' ? invertDictionary(data.dictionary) : data.dictionary;
       const randomWords = getRandomWords(maybeInvertDictionary, 10);
 
-      randomWords.forEach((word, index) => {
+      const questions = isSpelling ? prepareSpellingQuestions(randomWords) : prepareTranslationQuestions(randomWords, maybeInvertDictionary);
+
+      questions.forEach(({ text, correctAnswer, options }, index) => {
         const questionDiv = document.createElement('div');
         questionDiv.classList.add('question');
-        const correctAnswer = maybeInvertDictionary[word];
-        const options = getOptions(maybeInvertDictionary, correctAnswer);
         const shuffledOptions = shuffleArray(options);
         questionDiv.innerHTML = `
-          <p>${index + 1}. ${word}</p>
+          <p>${index + 1}. ${text}</p>
           ${shuffledOptions.map(option => `
-            <label class="answer"><input type="radio" name="q${index + 1}" value="${option}" class="mobile-friendly-radio"> ${option}</input></label><br>
+        <label class="answer"><input type="radio" name="q${index + 1}" value="${option}" class="mobile-friendly-radio"> ${option}</input></label><br>
           `).join('')}
         `;
 
+        const quizForm = document.getElementById('quizForm');
         quizForm.appendChild(questionDiv); // Append the question div to the form
+
         answers[`q${index + 1}`] = correctAnswer;
       });
+
+    function prepareTranslationQuestions(words, dictionary) {
+      return words.map(text => {
+        const correctAnswer = dictionary[text];
+        const options = getOptions(dictionary, correctAnswer);
+        return { text, correctAnswer, options };
+      });
+    }
+
+    function prepareSpellingQuestions(words) {
+      return words.map(word => {
+        const options = generateSpellingMistakes(word, 6);
+        options.push(word);
+        const sortedOptions = options.sort((a, b) => a.localeCompare(b));
+
+        return { text: '', correctAnswer: word, options: sortedOptions };
+      });
+    }
     });
 });
 
@@ -60,7 +83,7 @@ function shuffleArray(array) {
  * @example
  * const dict = { 'hello': 'hola', 'world': 'mundo' };
  * const inverted = invertDictionary(dict);
- * console.log(inverted); // { 'hola': 'hello', 'mundo': 'world' }
+ * c....e.log(inverted); // { 'hola': 'hello', 'mundo': 'world' }
  */
 function invertDictionary(dictionary) {
   const inverted = {};
@@ -70,7 +93,7 @@ function invertDictionary(dictionary) {
   return inverted;
 }
 
-function submitQuiz(fromLang) {
+function submitQuiz() {
   let score = 0;
   const form = document.getElementById('quizForm');
   const resultDiv = document.getElementById('result');
@@ -109,7 +132,7 @@ function submitQuiz(fromLang) {
   document.getElementById('btn-back').removeAttribute('hidden');
   document.getElementById('btn-review-stats').hidden = false;
 
-  localStorage.setItem('statistics', JSON.stringify(statistics));
+  localStorage.setItem(statsDocName, JSON.stringify(statistics));
 }
 
 function updateStatistics(word, isCorrect) {

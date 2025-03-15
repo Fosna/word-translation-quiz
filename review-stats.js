@@ -1,10 +1,11 @@
-console.log('ant');
-
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('bee');
-
     const statsContainer = document.getElementById('statsContainer');
-    const stats = JSON.parse(localStorage.getItem('statistics')) || {};
+    const urlParams = new URLSearchParams(window.location.search); // Define urlParams
+    const isSpelling = urlParams.get('spelling') === 'true'; // Default to false if not specified
+
+    const statsItemName = isSpelling ? 'spellingStatistics' : 'statistics';
+    
+    const stats = JSON.parse(localStorage.getItem(statsItemName)) || {};
 
     // Create table element
     const table = document.createElement('table');
