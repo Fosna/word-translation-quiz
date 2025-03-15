@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const fromLang = urlParams.get('fromLang') || 'eng'; // Default to 'eng' if not specified
 
       const maybeInvertDictionary = fromLang === 'cro' ? invertDictionary(data.dictionary) : data.dictionary;
-      const randomWords = getRandomWords(maybeInvertDictionary, 3);
+      const randomWords = getRandomWords(maybeInvertDictionary, 10);
 
       randomWords.forEach((word, index) => {
         const questionDiv = document.createElement('div');
