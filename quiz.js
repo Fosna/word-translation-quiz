@@ -9,16 +9,7 @@ const urlParams = new URLSearchParams(window.location.search);
       const quizForm = document.getElementById('quizForm');
       const fromLang = urlParams.get('fromLang') || 'eng'; // Default to 'eng' if not specified
 
-      console.log(data.dictionary);
-      console.log('ant');
-      console.log(invertDictionary(data.dictionary));
-      console.log('bee');
-      console.log(data.dictionary);
-
       const maybeInvertDictionary = fromLang === 'cro' ? invertDictionary(data.dictionary): data.dictionary;
-
-      console.log(fromLang, maybeInvertDictionary)
-
       const randomWords = getRandomWords(maybeInvertDictionary, 10);
 
       randomWords.forEach((word, index) => {
@@ -104,6 +95,9 @@ function submitQuiz(fromLang) {
   const totalQuestions = Object.keys(answers).length;
   const percentage = (score / totalQuestions) * 100;
   resultDiv.textContent = `You scored ${score} out of ${totalQuestions} (${percentage.toFixed(2)}%)`;
+
+  document.getElementById('btn-reload').removeAttribute('hidden');
+  document.getElementById('btn-back').removeAttribute('hidden');
 }
 
 function devTest() {
