@@ -1,0 +1,54 @@
+{
+    "WC": {
+        "correct": 1,
+        "wrong": 0
+    },
+    "pobjednik": {
+        "correct": 0,
+        "wrong": 1
+    },
+    "susjedstvo": {
+        "correct": 0,
+        "wrong": 1
+    },
+    "turnir": {
+        "correct": 0,
+        "wrong": 1
+    },
+    "trgovina": {
+        "correct": 0,
+        "wrong": 1
+    },
+    "palica": {
+        "correct": 0,
+        "wrong": 1
+    },
+    "žičara": {
+        "correct": 0,
+        "wrong": 1
+    },
+    "ležati na": {
+        "correct": 0,
+        "wrong": 1
+    },
+    "putovanje": {
+        "correct": 0,
+        "wrong": 1
+    },
+    "kaciga": {
+        "correct": 0,
+        "wrong": 1
+    },
+    "spustiti se niz": {
+        "correct": 1,
+        "wrong": 0
+    },
+    "podrum": {
+        "correct": 0,
+        "wrong": 1
+    },
+    "SAD": {
+        "correct": 0,
+        "wrong": 1
+    }
+}

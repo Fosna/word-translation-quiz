@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reset Statistics</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Reset Statistics</h1>
+  <p>Are you sure you want to reset all statistics? This action cannot be undone.</p>
+  <button id="confirm-reset">Yes, reset statistics</button>
+  <button id="cancel-reset">No, go back</button>
+
+  <script>
+    document.getElementById('confirm-reset').addEventListener('click', function() {
+      if (confirm('Are you absolutely sure you want to reset all statistics? This action cannot be undone.')) {
+        localStorage.clear();
+        alert('Statistics have been reset.');
+        window.location.href = 'index.html';
+      }
+    });
+
+    document.getElementById('cancel-reset').addEventListener('click', function() {
+      window.location.href = 'index.html';
+    });
+  </script>
+</body>
+</html>

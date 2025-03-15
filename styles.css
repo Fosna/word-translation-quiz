@@ -53,3 +53,17 @@ button:hover {
 .wrong {
   color: red;
 }
+
+.stats-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.stats-table, .stats-table th, .stats-table td {
+    border: 1px solid black;
+}
+
+.stats-table th, .stats-table td {
+    padding: 8px;
+    text-align: left;
+}

@@ -1,7 +1,8 @@
 let answers = {};
+let statistics = JSON.parse(localStorage.getItem('statistics')) || {};
 
 document.addEventListener('DOMContentLoaded', () => {
-const urlParams = new URLSearchParams(window.location.search);
+  const urlParams = new URLSearchParams(window.location.search);
 
   fetch('dictionary.json')
     .then(response => response.json())
@@ -9,8 +10,8 @@ const urlParams = new URLSearchParams(window.location.search);
       const quizForm = document.getElementById('quizForm');
       const fromLang = urlParams.get('fromLang') || 'eng'; // Default to 'eng' if not specified
 
-      const maybeInvertDictionary = fromLang === 'cro' ? invertDictionary(data.dictionary): data.dictionary;
-      const randomWords = getRandomWords(maybeInvertDictionary, 10);
+      const maybeInvertDictionary = fromLang === 'cro' ? invertDictionary(data.dictionary) : data.dictionary;
+      const randomWords = getRandomWords(maybeInvertDictionary, 3);
 
       randomWords.forEach((word, index) => {
         const questionDiv = document.createElement('div');
@@ -84,12 +85,20 @@ function submitQuiz(fromLang) {
       score++;
       resultP.textContent = `✅ Correct`;
       resultP.classList.add('correct');
+      updateStatistics(value, true);
     } else {
-      resultP.textContent = `❌ Wrong (➡️ Correct answer: ${value})`;
+      resultP.textContent = `❌ Wrong (Correct answer ➡️ ${value})`;
       resultP.classList.add('wrong');
+      updateStatistics(value, false);
     }
 
+    const stats = statistics[value];
+    const statsP = document.createElement('p');
+    statsP.textContent = `Statistics: Correct: ${stats.correct}, Incorrect: ${stats.wrong}`;
+    statsP.classList.add('stats');
+
     questionDiv.appendChild(resultP);
+    questionDiv.appendChild(statsP);
   }
 
   const totalQuestions = Object.keys(answers).length;
@@ -98,6 +107,20 @@ function submitQuiz(fromLang) {
 
   document.getElementById('btn-reload').removeAttribute('hidden');
   document.getElementById('btn-back').removeAttribute('hidden');
+  document.getElementById('btn-review-stats').hidden = false;
+
+  localStorage.setItem('statistics', JSON.stringify(statistics));
+}
+
+function updateStatistics(word, isCorrect) {
+  if (!statistics[word]) {
+    statistics[word] = { correct: 0, wrong: 0 };
+  }
+  if (isCorrect) {
+    statistics[word].correct++;
+  } else {
+    statistics[word].wrong++;
+  }
 }
 
 function devTest() {

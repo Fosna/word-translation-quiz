@@ -1,0 +1,84 @@
+User Starts Quiz:
+
+The user initiates a word translation quiz.
+The application presents a word and asks for the translation.
+
+Step-by-Step Tasks for Implementation:
+
+1. **Start Quiz:** DONE
+   - Add a "Start Quiz" button to the user interface.
+   - Implement functionality to display a word when the quiz starts.
+
+2. **Submit Answer:** DONE
+   - Add an input field and a "Submit" button for the user to submit their answer.
+   - Implement functionality to check if the submitted answer is correct or incorrect.
+
+3. **Update Statistics:** DONE
+   - Create a data structure to store statistics for each word (e.g., an object with word keys and correct/wrong counts).
+   - Implement functionality to update the statistics based on the user's answer.
+   - Save the updated statistics to local storage.
+
+4. **Display Feedback:** DONE
+   - Implement functionality to provide immediate feedback to the user, indicating whether the answer was correct or incorrect.
+   - Display the current statistics for the word (e.g., "Correct: 3, Wrong: 2").
+   - Display this information below the correct and incorrect results for each question.
+
+5. **Review Statistics:** DONE
+   - Add a "Review Statistics" button to the user interface after submitting the quiz.
+   - Ensure the "Review Statistics" option is also accessible from the index page.
+   - Implement functionality to retrieve and display statistics from local storage.
+   - Display the statistics in alphabetical order, showing each word along with the counts of correct and incorrect answers.
+
+6. **Reset Statistics:**
+   - Provide an option for the user to reset the statistics.
+   - Implement functionality to clear the statistics from local storage.
+   - Implement a double confirmation safety check before performing this action. It should be on separate page under Utils section on main page.
+
+Additional Considerations:
+
+Persistent Storage:
+
+Ensure that the statistics are stored persistently using local storage so that they are available even after the user closes and reopens the application.
+
+User Interface:
+
+Design a user-friendly interface for displaying the statistics.
+Consider using tables or charts to make the statistics more visually appealing and easier to understand.
+
+Example User Flow:
+
+Start Quiz:
+
+User clicks "Start Quiz" button.
+Application displays a word: "apple".
+
+Submit Answer:
+
+User types "manzana" and clicks "Submit".
+Application checks the answer and determines it is correct.
+
+Update Statistics:
+
+Application updates the statistics for "apple":
+Correct: 1
+Wrong: 0
+Statistics are saved to local storage.
+
+Display Feedback:
+
+Application displays: "Correct! (Correct: 1, Wrong: 0)".
+
+Review Statistics:
+
+User clicks "Review Statistics" button.
+Application displays a list of words with their statistics:
+"apple: Correct: 1, Wrong: 0"
+"banana: Correct: 2, Wrong: 1"
+etc.
+
+Submit Quiz:
+
+User clicks "Submit Quiz" button.
+Application displays the overall statistics for the quiz session:
+"Total Correct: 3, Total Wrong: 1"
+
