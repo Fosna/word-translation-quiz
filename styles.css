@@ -1,9 +1,18 @@
 body {
   font-family: Arial, sans-serif;
   margin: 20px;
+  font-size: 1.2em; 
 }
 .question {
   margin-bottom: 20px;
+}
+.question p {
+  margin-bottom: 5px;
+}
+label.answer {
+  display: block;
+  padding: 10px; /* Increase padding for better touch targets */
+  margin-bottom: -30px /* Add vertical spacing between answers */
 }
 button {
   margin-top: 20px;

@@ -7,22 +7,30 @@ const urlParams = new URLSearchParams(window.location.search);
     .then(response => response.json())
     .then(data => {
       const quizForm = document.getElementById('quizForm');
-      const dictionary = data.dictionary;
-      const randomWords = getRandomWords(dictionary, 10);
-
       const fromLang = urlParams.get('fromLang') || 'eng'; // Default to 'eng' if not specified
-      const maybeInvertedRandomWords = fromLang === 'cro' ? invertDictionary(randomWords): randomWords;
 
-      maybeInvertedRandomWords.forEach((word, index) => {
+      console.log(data.dictionary);
+      console.log('ant');
+      console.log(invertDictionary(data.dictionary));
+      console.log('bee');
+      console.log(data.dictionary);
+
+      const maybeInvertDictionary = fromLang === 'cro' ? invertDictionary(data.dictionary): data.dictionary;
+
+      console.log(fromLang, maybeInvertDictionary)
+
+      const randomWords = getRandomWords(maybeInvertDictionary, 10);
+
+      randomWords.forEach((word, index) => {
         const questionDiv = document.createElement('div');
         questionDiv.classList.add('question');
-        const correctAnswer = dictionary[word];
-        const options = getOptions(dictionary, correctAnswer);
+        const correctAnswer = maybeInvertDictionary[word];
+        const options = getOptions(maybeInvertDictionary, correctAnswer);
         const shuffledOptions = shuffleArray(options);
         questionDiv.innerHTML = `
           <p>${index + 1}. ${word}</p>
           ${shuffledOptions.map(option => `
-            <label><input type="radio" name="q${index + 1}" value="${option}"> ${option}</label><br>
+            <label class="answer"><input type="radio" name="q${index + 1}" value="${option}" class="mobile-friendly-radio"> ${option}</input></label><br>
           `).join('')}
         `;
 
@@ -63,7 +71,11 @@ function shuffleArray(array) {
  * console.log(inverted); // { 'hola': 'hello', 'mundo': 'world' }
  */
 function invertDictionary(dictionary) {
-  return Object.fromEntries(Object.entries(dictionary).map(([k, v]) => [k, Object.keys(dictionary).find(key => dictionary[key] === v)]));
+  const inverted = {};
+  for (const [key, value] of Object.entries(dictionary)) {
+    inverted[value] = key;
+  }
+  return inverted;
 }
 
 function submitQuiz(fromLang) {
