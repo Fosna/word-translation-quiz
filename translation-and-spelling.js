@@ -7,7 +7,7 @@ async function generateRandomCroatianWords() {
     const dictionary = data.dictionary;
     const keys = Object.keys(dictionary);
     const randomKeys = keys.sort(() => 0.5 - Math.random()).slice(0, 10);
-    const randomWords = randomKeys.map(key => ({ correctAnswer: dictionary[key], text: key }));
+    const randomWords = randomKeys.map(key => ({ text: dictionary[key], correctAnswer: key }));
     return randomWords;
 }
 
@@ -60,12 +60,11 @@ function submitQuiz() {
         questionDiv.appendChild(resultP);
     });
 
-    const totalQuestions = Object.keys(answers).length;
+    const totalQuestions = inputs.length;
     const percentage = (score / totalQuestions) * 100;
     resultDiv.textContent = `You scored ${score} out of ${totalQuestions} (${percentage.toFixed(2)}%)`;
 
     document.getElementById('btn-reload').removeAttribute('hidden');
     document.getElementById('btn-back').removeAttribute('hidden');
-    document.getElementById('btn-review-stats').hidden = false;
 }
 
