@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Translation and Spelling Exercise</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Translation and Spelling Exercise</h1>
+    <form id="quizForm">
+      <!-- Questions will be loaded here -->
+    </form>
+    <button type="button" onclick="submitQuiz()" class="primary">Submit</button>
+    <div id="result" class="result"></div>
+    <button id="btn-reload" type="button" onclick="location.reload()" class="secondary" hidden>Try Again</button>
+    <button id="btn-review-stats" type="button" onclick="alert('Not implemented')" class="secondary" hidden>Review Statistics</button>
+    <button id="btn-back" type="button" onclick="window.location.href='index.html'" class="secondary" hidden>Back</button>
+
+    <script src="translation-and-spelling.js"></script>
+</body>
+</html>
