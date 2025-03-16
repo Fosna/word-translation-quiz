@@ -21,10 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
       questions.forEach(({ text, correctAnswer, options }, index) => {
         const questionDiv = document.createElement('div');
         questionDiv.classList.add('question');
-        const shuffledOptions = shuffleArray(options);
         questionDiv.innerHTML = `
           <p>${index + 1}. ${text}</p>
-          ${shuffledOptions.map(option => `
+          ${options.map(option => `
         <label class="answer"><input type="radio" name="q${index + 1}" value="${option}" class="mobile-friendly-radio"> ${option}</input></label><br>
           `).join('')}
         `;
@@ -38,14 +37,14 @@ document.addEventListener('DOMContentLoaded', () => {
     function prepareTranslationQuestions(words, dictionary) {
       return words.map(text => {
         const correctAnswer = dictionary[text];
-        const options = getOptions(dictionary, correctAnswer);
+        const options = shuffleArray(getOptions(dictionary, correctAnswer));
         return { text, correctAnswer, options };
       });
     }
 
     function prepareSpellingQuestions(words) {
       return words.map(word => {
-        const options = generateSpellingMistakes(word, 6);
+        const options = generateSpellingMistakes(word, 4);
         options.push(word);
         const sortedOptions = options.sort((a, b) => a.localeCompare(b));
 
