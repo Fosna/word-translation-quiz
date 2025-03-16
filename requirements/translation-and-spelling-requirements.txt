@@ -1,0 +1,59 @@
+User Flow:
+
+1. **Start Quiz:**
+   - User selects the translation and spelling quiz mode.
+   - Application generates 10 random Croatian words for translation.
+   - User is presented with a text input field for each word to write the English translation.
+   - **Note:** This exercise involves typing text to check both translation and spelling accuracy.
+
+2. **Answer Questions:**
+   - User types the English translation for each Croatian word in the provided text input fields.
+
+3. **Submit Quiz:**
+   - User clicks the "Submit Quiz" button.
+   - Application shows the correct and incorrect translations for each word.
+   - Application displays the total score (e.g., "Total Correct: 7, Total Wrong: 3").
+
+4. **Review Statistics:**
+   - User clicks the "Review Statistics" button.
+   - Application retrieves and displays statistics from local storage, showing each word along with the counts of correct and incorrect translations.
+
+5. **Reset Statistics:**
+   - User has the option to reset the statistics.
+   - Application clears the statistics from local storage after a double confirmation safety check.
+
+Data Flow:
+
+1. **Start Quiz:**
+   - User action: Select quiz mode and click "Start Quiz" button.
+   - Data: Generate 10 random Croatian words for translation.
+
+2. **Answer Questions:**
+   - User action: Type the English translation for each Croatian word.
+   - Data: Compare user input with the correct English translation.
+
+3. **Display Feedback:**
+   - User action: View feedback.
+   - Data: Update and display statistics for the word based on the user's answer.
+
+4. **Submit Quiz:**
+   - User action: Click "Submit Quiz" button.
+   - Data: Show correct and incorrect translations for each word.
+   - Data: Show statistics for each word, including the number of times the word was translated correctly and incorrectly.
+   - Data: Display total score.
+
+5. **Review Statistics:**
+   - User action: Click "Review Statistics" button.
+   - Data: Retrieve statistics from local storage and display them.
+
+6. **Reset Statistics:**
+   - User action: Opt to reset statistics.
+   - Data: Clear statistics from local storage after confirmation.
+
+Persistent Storage:
+
+- Ensure that the statistics are stored persistently using local storage so that they are available even after the user closes and reopens the application.
+
+User Interface:
+
+- Design a user-friendly interface for displaying the statistics.

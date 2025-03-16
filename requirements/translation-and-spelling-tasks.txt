@@ -1,0 +1,24 @@
+# Developer Tasks for Translation and Spelling Quiz
+
+## Task 1: Implement Start Quiz Functionality DONE
+- Create a function to generate 10 random Croatian words.
+- Display text input fields for each word.
+
+## Task 2: Implement Answer Questions Functionality DONE
+- Capture user input for each Croatian word.
+- Store user input for later comparison.
+
+## Task 3: Implement Submit Quiz Functionality DONE
+- Add event listener for the "Submit Quiz" button.
+- Compare user input with correct translations.
+- Display correct and incorrect translations.
+- Calculate and display the total score.
+
+## Task 4: Implement Display Feedback Functionality
+- Update statistics for each word based on user input.
+- Store updated statistics in local storage.
+
+## Task 5: Implement Review Statistics Functionality
+- Add event listener for the "Review Statistics" button.
+- Retrieve statistics from local storage.
+- Display statistics including counts of correct and incorrect translations.
