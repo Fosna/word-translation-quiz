@@ -48,7 +48,7 @@ function submitQuiz() {
         const questionDiv = textInput.parentElement;
         const resultP = document.createElement('p');
 
-        if (textInput && textInput.value === correctAnswer) {
+        if (textInput && textInput.value && textInput.value.trim().toLowerCase() === correctAnswer.toLowerCase()) {
             score++;
             resultP.textContent = `✅ Correct`;
             resultP.classList.add('correct');
